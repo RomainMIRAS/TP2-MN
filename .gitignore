@@ -18,3 +18,4 @@ TPBLAS/examples/test_complexe4.o
 TPBLAS/examples/test_dot
 TPBLAS/examples/test_dot_dyn
 TPBLAS/examples/test_dot.o
+TPBLAS/src/complexe2.o

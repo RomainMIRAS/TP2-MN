@@ -10,9 +10,9 @@ OPTIM=-O2 -fopenmp
 OPTIONS=-O2 -Wall -fPIC $(OPTIM) -I$(INC_DIR)
 # Bibliothèque statique
 
-libmnblas.a: copy.o swap.o dot.o complexe.o
+libmnblas.a: copy.o swap.o dot.o complexe.o 
 	rm -f libmnblas.a $(LIB_DIR)/libmnblas.a
-	ar -r libmnblas.a copy.o swap.o dot.o complexe.o
+	ar -r libmnblas.a copy.o swap.o dot.o complexe.o 
 	cp libmnblas.a $(LIB_DIR)
 
 # Bibliothèque dynamique

@@ -20,6 +20,16 @@ void mncblas_sswap(const int N, float *X, const int incX,
 void mncblas_dswap(const int N, double *X, const int incX, 
                  double *Y, const int incY)
 {
+  register unsigned int i = 0 ;
+  register unsigned int j = 0 ;
+  register double save ;
+  
+  for (; ((i < N) && (j < N)) ; i += incX, j+=incY)
+    {
+      save = Y [j] ;
+      Y [j] = X [i] ;
+      X [i] = save ;
+    }
 
   return ;
 }
