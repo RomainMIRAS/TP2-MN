@@ -30,7 +30,6 @@ inline complexe_double_t add_complexe_double (const complexe_double_t c1, const 
 }
 
 
-/*
 inline complexe_float_t mult_complexe_float (const complexe_float_t c1, const complexe_float_t c2)
 {
 
@@ -51,7 +50,7 @@ inline complexe_double_t div_complexe_double (const complexe_double_t c1, const 
 {
 
 }
-*/
+
 
 
 
