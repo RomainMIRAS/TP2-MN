@@ -58,7 +58,6 @@ complexe_float_t div_complexe_float (const complexe_float_t c1, const complexe_f
   r.real = top.real/bot;
   r.imaginary = top.imaginary/bot;
 
-  
   return r ;
 }
 
