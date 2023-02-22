@@ -7,7 +7,7 @@
 #define    NB_FOIS        512
 #define NB_ADD_OP 2
 #define NB_MUL_OP 6
-#define NB_DIV_OP 2
+#define NB_DIV_OP 14 
 
 #include "flop.h"
 
