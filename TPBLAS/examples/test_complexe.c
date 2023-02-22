@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 
   complexe_double_t cd1;
   complexe_double_t cd2;
+  complexe_double_t cd3;
 
   struct timeval start, end;
 
@@ -41,12 +42,12 @@ int main(int argc, char **argv)
 
   for (i = 0; i < NB_FOIS; i++)
   {
-    cd1 = add_complexe_double(cd1, cd2);
+    cd3 = add_complexe_double(cd1, cd2);
   }
 
   TOP_MICRO(end);
 
-  printf("boucle ADD : cd1.real %f cd1.imaginary %f duree %f \n", cd1.real, cd1.imaginary, tdiff_micro(&start, &end));
+  printf("boucle DIV : cd3.real %f cd3.imaginary %f duree %f \n", cd3.real, cd3.imaginary, tdiff_micro(&start, &end));
 
   calcul_flop_micro("Calcul complexe ADD : ", NB_FOIS * NB_ADD_OP, tdiff_micro(&start, &end));
 
@@ -58,12 +59,12 @@ int main(int argc, char **argv)
 
   for (i = 0; i < NB_FOIS; i++)
   {
-    cd1 = mult_complexe_double(cd1, cd2);
+    cd3 = mult_complexe_double(cd1, cd2);
   }
 
   TOP_MICRO(end);
 
-  printf("boucle MULT : cd1.real %f cd1.imaginary %f duree %f \n", cd1.real, cd1.imaginary, tdiff_micro(&start, &end));
+  printf("boucle MULT : cd3.real %f cd3.imaginary %f duree %f \n", cd3.real, cd3.imaginary, tdiff_micro(&start, &end));
 
   calcul_flop_micro("Calcul complexe MULT : ", NB_FOIS * NB_MUL_OP, tdiff_micro(&start, &end));
 
@@ -75,12 +76,12 @@ int main(int argc, char **argv)
 
   for (i = 0; i < NB_FOIS; i++)
   {
-    cd1 = div_complexe_double(cd1, cd2);
+    cd3 = div_complexe_double(cd1, cd2);
   }
 
   TOP_MICRO(end);
 
-  printf("boucle DIV : cd1.real %f cd1.imaginary %f duree %f \n", cd1.real, cd1.imaginary, tdiff_micro(&start, &end));
+  printf("boucle DIV : cd3.real %f cd3.imaginary %f duree %f \n", cd3.real, cd3.imaginary, tdiff_micro(&start, &end));
 
   calcul_flop_micro("Calcul complexe DIV : ", NB_FOIS * NB_DIV_OP, tdiff_micro(&start, &end));
 
