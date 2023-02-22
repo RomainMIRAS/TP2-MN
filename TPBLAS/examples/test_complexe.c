@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 
   complexe_double_t cd1;
   complexe_double_t cd2;
+  complexe_double_t cd3;
 
   struct timeval start, end;
 
@@ -41,7 +42,7 @@ int main(int argc, char **argv)
 
   for (i = 0; i < NB_FOIS; i++)
   {
-    cd1 = add_complexe_double(cd1, cd2);
+    cd3 = add_complexe_double(cd1, cd2);
   }
 
   TOP_MICRO(end);
@@ -58,7 +59,7 @@ int main(int argc, char **argv)
 
   for (i = 0; i < NB_FOIS; i++)
   {
-    cd1 = mult_complexe_double(cd1, cd2);
+    cd3 = mult_complexe_double(cd1, cd2);
   }
 
   TOP_MICRO(end);
@@ -75,7 +76,7 @@ int main(int argc, char **argv)
 
   for (i = 0; i < NB_FOIS; i++)
   {
-    cd1 = div_complexe_double(cd1, cd2);
+    cd3 = div_complexe_double(cd1, cd2);
   }
 
   TOP_MICRO(end);
