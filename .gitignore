@@ -6,3 +6,15 @@ TPBLAS/src/dot.o
 TPBLAS/src/libmnblas.a
 TPBLAS/src/libmnblasdyn.so
 TPBLAS/src/swap.o
+TPBLAS/examples/flop.o
+TPBLAS/examples/test_complexe
+TPBLAS/examples/test_complexe.o
+TPBLAS/examples/test_complexe2
+TPBLAS/examples/test_complexe3
+TPBLAS/examples/test_complexe2.o
+TPBLAS/examples/test_complexe3.o
+TPBLAS/examples/test_complexe4
+TPBLAS/examples/test_complexe4.o
+TPBLAS/examples/test_dot
+TPBLAS/examples/test_dot_dyn
+TPBLAS/examples/test_dot.o
