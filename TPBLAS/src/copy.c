@@ -37,7 +37,7 @@ void mncblas_ccopy(const int N, const void *X, const int incX,
   for (; ((i < N) && (j < N)); i += incX, j += incY)
   {
       // Affection void *
-      *((int *)Y + j) = *((int *)X + i);
+      *((float *)Y + j) = *((float *)X + i);
   }
 
   return;
