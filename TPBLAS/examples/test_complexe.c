@@ -7,6 +7,9 @@
 #include "flop.h"
 
 #define NB_FOIS 512
+#define NB_ADD_OP 2
+#define NB_MUL_OP 6
+#define NB_DIV_OP 2
 
 int main(int argc, char **argv)
 {
@@ -45,7 +48,7 @@ int main(int argc, char **argv)
 
   printf("boucle ADD : cd1.real %f cd1.imaginary %f duree %f \n", cd1.real, cd1.imaginary, tdiff_micro(&start, &end));
 
-  calcul_flop_micro("Calcul complexe ADD : ", NB_FOIS * 2, tdiff_micro(&start, &end));
+  calcul_flop_micro("Calcul complexe ADD : ", NB_FOIS * NB_ADD_OP, tdiff_micro(&start, &end));
 
   printf("-----------------------\n");
   printf("TEST MULT COMPLEXE DOUBLE\n");
@@ -62,7 +65,7 @@ int main(int argc, char **argv)
 
   printf("boucle MULT : cd1.real %f cd1.imaginary %f duree %f \n", cd1.real, cd1.imaginary, tdiff_micro(&start, &end));
 
-  calcul_flop_micro("Calcul complexe MULT : ", NB_FOIS * 2, tdiff_micro(&start, &end));
+  calcul_flop_micro("Calcul complexe MULT : ", NB_FOIS * NB_MUL_OP, tdiff_micro(&start, &end));
 
   printf("-----------------------\n");
   printf("TEST DIV COMPLEXE DOUBLE\n");
@@ -79,7 +82,7 @@ int main(int argc, char **argv)
 
   printf("boucle DIV : cd1.real %f cd1.imaginary %f duree %f \n", cd1.real, cd1.imaginary, tdiff_micro(&start, &end));
 
-  calcul_flop_micro("Calcul complexe DIV : ", NB_FOIS * 2, tdiff_micro(&start, &end));
+  calcul_flop_micro("Calcul complexe DIV : ", NB_FOIS * NB_DIV_OP, tdiff_micro(&start, &end));
 
   exit(0);
 }
