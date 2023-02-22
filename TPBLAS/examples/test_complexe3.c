@@ -13,7 +13,7 @@
 
 int main (int argc, char **argv)
 {
-   complexe_float_t c1 = {1.0, 2.0};
+complexe_float_t c1 = {1.0, 2.0};
   complexe_float_t c2 = {3.0, 6.0};
 
   complexe_double_t cd1;
@@ -47,7 +47,7 @@ int main (int argc, char **argv)
 
   TOP_NANO(end);
 
-  printf("boucle ADD : cd1.real %f cd1.imaginary %f duree %f \n", cd1.real, cd1.imaginary, tdiff_micro(&start, &end));
+  printf("boucle DIV : cd3.real %f cd3.imaginary %f duree %f \n", cd3.real, cd3.imaginary, tdiff_micro(&start, &end));
 
   calcul_flop_micro("Calcul complexe ADD : ", NB_FOIS * NB_ADD_OP, tdiff_micro(&start, &end));
 
@@ -64,7 +64,7 @@ int main (int argc, char **argv)
 
   TOP_NANO(end);
 
-  printf("boucle MULT : cd1.real %f cd1.imaginary %f duree %f \n", cd1.real, cd1.imaginary, tdiff_micro(&start, &end));
+  printf("boucle MULT : cd3.real %f cd3.imaginary %f duree %f \n", cd3.real, cd3.imaginary, tdiff_micro(&start, &end));
 
   calcul_flop_micro("Calcul complexe MULT : ", NB_FOIS * NB_MUL_OP, tdiff_micro(&start, &end));
 
@@ -81,7 +81,7 @@ int main (int argc, char **argv)
 
   TOP_NANO(end);
 
-  printf("boucle DIV : cd1.real %f cd1.imaginary %f duree %f \n", cd1.real, cd1.imaginary, tdiff_micro(&start, &end));
+  printf("boucle DIV : cd3.real %f cd3.imaginary %f duree %f \n", cd3.real, cd3.imaginary, tdiff_micro(&start, &end));
 
   calcul_flop_micro("Calcul complexe DIV : ", NB_FOIS * NB_DIV_OP, tdiff_micro(&start, &end));
 
