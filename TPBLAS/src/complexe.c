@@ -48,6 +48,15 @@ complexe_float_t div_complexe_float (const complexe_float_t c1, const complexe_f
 {
   complexe_float_t r ;
 
+  complexe_float_t inverseBot;
+  inverseBot.imaginary = -c2.imaginary;
+  inverseBot.real = c2.real;
+
+  complexe_float_t top = mult_complexe_float(c1, inverseBot);
+  complexe_float_t bot = mult_complexe_float(c2, inverseBot);
+
+  r.real = top.real/bot.real;
+  r.imaginary = bot.imaginary/bot.real;
 
   
   return r ;
@@ -57,7 +66,15 @@ complexe_double_t div_complexe_double (const complexe_double_t c1, const complex
 {
   complexe_double_t r ;
 
+  complexe_double_t inverseBot;
+  inverseBot.imaginary = -c2.imaginary;
+  inverseBot.real = c2.real;
 
+  complexe_double_t top = mult_complexe_double(c1, inverseBot);
+  complexe_double_t bot = mult_complexe_double(c2, inverseBot);
+
+  r.real = top.real/bot.real;
+  r.imaginary = bot.imaginary/bot.real;
   
   return r ;
 }
