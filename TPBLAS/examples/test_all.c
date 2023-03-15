@@ -5,7 +5,7 @@
 
 #include "flop.h"
 
-#define VECSIZE 2
+#define VECSIZE 5
 
 typedef float vfloat[VECSIZE];
 
