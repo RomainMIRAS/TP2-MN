@@ -53,19 +53,28 @@ void mncblas_cswap(const int N, void *X, const int incX,
       ((float*)Y )[j+1] = ((float*)X )[i+1] ;
       ((float*)X )[i+1] = save ;
     }
-
-      printf("VALUE FIRST OF (3, 6) : %f\n", ((float*)Y)[0]);
-      printf("VALUE FIRST OF (1, 2) : %f\n", ((float*)X)[0]);
-
-      printf("VALUE SECOND OF (3, 6) : %f\n", ((float*)Y)[1]);
-      printf("VALUE SECOND OF (1, 2) : %f\n", ((float*)X)[1]);
   return ;
 }
 
 void mncblas_zswap(const int N, void *X, const int incX, 
 		                    void *Y, const int incY) // double
 {
+  register unsigned int i = 0 ;
+  register unsigned int j = 0 ;
+  register double save;
 
+      
+  
+  for (; ((i < N) && (j < N)) ; i += incX, j+=incY)
+    {
+      save = ((double*)Y )[j] ;
+      ((double*)Y )[j] = ((double*)X )[i] ;
+      ((double*)X )[i]  = save ;
+
+      save = ((double*)Y )[j+1] ;
+      ((double*)Y )[j+1] = ((double*)X )[i+1] ;
+      ((double*)X )[i+1] = save ;
+    }
   return ;
 }
 
