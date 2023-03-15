@@ -5,7 +5,7 @@
 
 #include "flop.h"
 
-#define VECSIZE 2
+#define VECSIZE 3
 
 typedef float vfloat[VECSIZE];
 
@@ -228,5 +228,93 @@ int main(int argc, char **argv)
     for (size_t i = 0; i < VECSIZE; i++)
     {
         printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
+    }
+
+
+    init_flop_tsc();
+    printf("==========================================================\n");
+    printf("TEST SWAPF\n");
+    printf("==========================================================\n");
+
+    init_flop_tsc();
+    val1 = 1.0;
+    val2 = 3.0;
+
+    vectorF_init(vec1, val1);
+
+    vectorF_init(vec2, val2);
+
+    TOP_MICRO(start);
+    mncblas_sswap(VECSIZE, vec1, 1, vec2, 1);
+    TOP_MICRO(end);
+
+    printf("SHOW F VEC1\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 1:%ld : %f\n", i, vec1[i]);
+    }
+
+    printf("SHOW F VEC2\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 2:%ld : %f\n", i, vec2[i]);
+    }
+
+    calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
+
+    printf("==========================================================\n");
+    printf("TEST SWAPD\n");
+    printf("==========================================================\n");
+
+    init_flop_tsc();
+    val3 = 3.0;
+    val4 = 5.0;
+
+    vectorD_init(vec3, val3);
+
+    vectorD_init(vec4, val4);
+
+    TOP_MICRO(start);
+    mncblas_dswap(VECSIZE, vec3, 1, vec4, 1);
+    TOP_MICRO(end);
+
+    printf("SHOW D VEC1\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 1:%ld : %f\n", i, vec3[i]);
+    }
+
+    printf("SHOW D VEC2\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 2:%ld : %f\n", i, vec4[i]);
+    }
+
+    calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
+
+    printf("==========================================================\n");
+    printf("TEST COMPLEX C\n");
+    printf("==========================================================\n");
+
+    init_flop_tsc();
+
+    vectorC_init(vec5, val5);
+
+    vectorC_init(vec6, val6);
+
+    TOP_MICRO(start);
+    mncblas_cswap(VECSIZE, vec5, 2, vec6, 2);
+    TOP_MICRO(end);
+
+    printf("SHOW C VEC1\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
+    }
+
+    printf("SHOW C VEC2\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
     }
 }
