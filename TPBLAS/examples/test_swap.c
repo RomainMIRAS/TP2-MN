@@ -80,6 +80,7 @@ int vectorC_equal(vfloatcomplexe V1, complexe_float_t val)
   for (i = 0; i < VECSIZE; i++)
   {
     if (V1[i].imaginary != val.imaginary || V1[i].real != val.real){
+      printf("Reel : %f et Imaginary : %f",V1[i].imaginary,V1[i].real);//
       return 0;
     }
 
@@ -111,10 +112,7 @@ int vectorZ_equal(vdoublecomplexe V1, complexe_double_t val)
 
 int main(int argc, char **argv)
 {
-  struct timeval start, end;
   unsigned long long int start_tsc, end_tsc;
-
-  float res;
   int i;
 
   init_flop_tsc();
@@ -156,19 +154,19 @@ int main(int argc, char **argv)
 
   for (i = 0; i < NB_FOIS; i++)
   {
-    vectorF_init(vec3, val3);
+    vectorD_init(vec3, val3);
     
-    vectorF_init(vec4, val4);
+    vectorD_init(vec4, val4);
 
     start_tsc = _rdtsc();
-    mncblas_sswap(VECSIZE, vec3, 3, vec4, 3);
+    mncblas_dswap(VECSIZE, vec3, 3, vec4, 3);
     end_tsc = _rdtsc();
 
     calcul_flop_nano("sdot nano ", 0 * VECSIZE, end_tsc - start_tsc);
   }
 
-  printf("WORKING ? %s\n", (vectorF_equal(vec3, val4) == 0) ? "NON" : "OUI");
-  printf("WORKING ? %s\n", (vectorF_equal(vec4, val3) == 0) ? "NON" : "OUI");
+  printf("WORKING ? %s\n", (vectorD_equal(vec3, val4) == 0) ? "NON" : "OUI");
+  printf("WORKING ? %s\n", (vectorD_equal(vec4, val3) == 0) ? "NON" : "OUI");
 
   printf("==========================================================\n");
   printf("TEST SWAPC\n");
@@ -203,7 +201,7 @@ int main(int argc, char **argv)
 
   init_flop_tsc();
   complexe_double_t val7 = {1.0, 2.0};
-  complexe_double_t val8 = {3.0, 6.0};
+  complexe_double_t val8 = {3.0, 6.0};//
 
   for (i = 0; i < NB_FOIS; i++)
   {
