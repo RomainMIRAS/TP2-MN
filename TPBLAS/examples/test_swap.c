@@ -66,8 +66,9 @@ void vectorC_init(vfloatcomplexe V, complexe_float_t x)
 {
   register unsigned int i;
 
-  for (i = 0; i < VECSIZE; i++)
+  for (i = 0; i < VECSIZE; i++){
     V[i] = x;
+  }
 
   return;
 }
@@ -79,7 +80,6 @@ int vectorC_equal(vfloatcomplexe V1, complexe_float_t val)
   for (i = 0; i < VECSIZE; i++)
   {
     if (V1[i].imaginary != val.imaginary || V1[i].real != val.real){
-      printf("Reel : %f et Imaginary : %f",V1[i].imaginary,V1[i].real);
       return 0;
     }
 
@@ -180,14 +180,14 @@ int main(int argc, char **argv)
   complexe_float_t val5 = {1.0, 2.0};
   complexe_float_t val6 = {3.0, 6.0};
 
+
   for (i = 0; i < NB_FOIS; i++)
   {
     vectorC_init(vec5, val5);
-    
     vectorC_init(vec6, val6);
 
     start_tsc = _rdtsc();
-    mncblas_cswap(VECSIZE, vec5, sizeof(float)*2, vec6, sizeof(float)*2);
+      mncblas_cswap(VECSIZE, vec5, sizeof(float)*2, vec6, sizeof(float)*2);
     end_tsc = _rdtsc();
     calcul_flop_nano("sdot nano ", 0 * VECSIZE, end_tsc - start_tsc);
   }
@@ -199,7 +199,7 @@ int main(int argc, char **argv)
   printf("TEST SWAPZ\n");
   printf("==========================================================\n");
 
-  vfloatcomplexe vec7, vec8;
+  vdoublecomplexe vec7, vec8;
 
   init_flop_tsc();
   complexe_double_t val7 = {1.0, 2.0};

@@ -22,3 +22,4 @@ TPBLAS/src/complexe2.o
 TPBLAS/examples/test_copy.o
 TPBLAS/examples/test_swap.o
 .vscode/settings.json
+TPBLAS/examples/test_all.c
