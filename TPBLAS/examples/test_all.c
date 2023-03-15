@@ -13,7 +13,7 @@ typedef double vdouble[VECSIZE];
 
 typedef complexe_float_t vfloatcomplexe[VECSIZE];
 
-typedef complexe_double_t vdoublecomplexe[VECSIZE];
+typedef complexe_double_t vdoublecomplexe[VECSIZE];//
 
 void vectorF_init(vfloat V, float x)
 {
@@ -105,10 +105,6 @@ int vectorZ_equal(vdoublecomplexe V1, vdoublecomplexe V2)
 int main(int argc, char **argv)
 {
     struct timeval start, end;
-    unsigned long long int start_tsc, end_tsc;
-
-    float res;
-    int i;
 
     init_flop_tsc();
     printf("==========================================================\n");
@@ -132,13 +128,13 @@ int main(int argc, char **argv)
     printf("SHOW F VEC1\n");
     for (size_t i = 0; i < VECSIZE; i++)
     {
-        printf("VEC 1:%d : %f\n", i, vec1[i]);
+        printf("VEC 1:%ld : %f\n", i, vec1[i]);
     }
 
     printf("SHOW F VEC2\n");
     for (size_t i = 0; i < VECSIZE; i++)
     {
-        printf("VEC 2:%d : %f\n", i, vec2[i]);
+        printf("VEC 2:%ld : %f\n", i, vec2[i]);
     }
 
     calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
@@ -164,13 +160,13 @@ int main(int argc, char **argv)
     printf("SHOW D VEC1\n");
     for (size_t i = 0; i < VECSIZE; i++)
     {
-        printf("VEC 1:%d : %f\n", i, vec3[i]);
+        printf("VEC 1:%ld : %f\n", i, vec3[i]);
     }
 
     printf("SHOW D VEC2\n");
     for (size_t i = 0; i < VECSIZE; i++)
     {
-        printf("VEC 2:%d : %f\n", i, vec4[i]);
+        printf("VEC 2:%ld : %f\n", i, vec4[i]);
     }
 
     calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
@@ -196,13 +192,13 @@ int main(int argc, char **argv)
     printf("SHOW C VEC1\n");
     for (size_t i = 0; i < VECSIZE; i++)
     {
-        printf("VEC 1:%d : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
+        printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
     }
 
     printf("SHOW C VEC2\n");
     for (size_t i = 0; i < VECSIZE; i++)
     {
-        printf("VEC 2:%d : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
+        printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
     }
 
     printf("==========================================================\n");
@@ -225,12 +221,12 @@ int main(int argc, char **argv)
     printf("SHOW Z VEC1\n");
     for (size_t i = 0; i < VECSIZE; i++)
     {
-        printf("VEC 1:%d : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
+        printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
     }
 
     printf("SHOW Z VEC2\n");
     for (size_t i = 0; i < VECSIZE; i++)
     {
-        printf("VEC 2:%d : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
+        printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
     }
 }
