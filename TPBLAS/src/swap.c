@@ -47,7 +47,7 @@ void mncblas_cswap(const int N, void *X, const int incX,
       ((float*)Y )[j] = ((float*)X )[i] ;
       ((float*)X )[i]  = save ;
 
-      save = ((float*)Y )[j] ;
+      save = ((float*)Y )[j+1] ;
       ((float*)Y )[j+1] = ((float*)X )[i+1] ;
       ((float*)X )[i+1] = save ;
     }
