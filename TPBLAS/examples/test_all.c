@@ -186,7 +186,7 @@ int main(int argc, char **argv)
     vectorC_init(vec6, val6);
 
     TOP_MICRO(start);
-    mncblas_ccopy(VECSIZE, vec5, 2, vec6, 2);
+    mncblas_ccopy(VECSIZE, vec5, 1, vec6, 1);
     TOP_MICRO(end);
 
     printf("SHOW C VEC1\n");
@@ -215,7 +215,7 @@ int main(int argc, char **argv)
     vectorZ_init(vec8, val8);
 
     TOP_MICRO(start);
-    mncblas_zcopy(VECSIZE, vec7, 2, vec8, 2);
+    mncblas_zcopy(VECSIZE, vec7, 1, vec8, 1);
     TOP_MICRO(end);
 
     printf("SHOW Z VEC1\n");
@@ -303,7 +303,7 @@ int main(int argc, char **argv)
     vectorC_init(vec6, val6);
 
     TOP_MICRO(start);
-    mncblas_cswap(VECSIZE, vec5, 2, vec6, 2);
+    mncblas_cswap(VECSIZE, vec5, 1, vec6, 1);
     TOP_MICRO(end);
 
     printf("SHOW C VEC1\n");
@@ -326,11 +326,16 @@ int main(int argc, char **argv)
 
     init_flop_tsc();
 
+    val7.real = 1.0;
+    val7.imaginary = 2.0;
+    val8.real = 3.0;
+    val8.imaginary = 6.0;
+
     vectorZ_init(vec7, val7);
     vectorZ_init(vec8, val8);
 
     TOP_MICRO(start);
-    mncblas_zcopy(VECSIZE, vec7, 4, vec8, 4);
+    mncblas_zswap(VECSIZE, vec7, 1, vec8, 1);
     TOP_MICRO(end);
 
     printf("SHOW Z VEC1\n");
