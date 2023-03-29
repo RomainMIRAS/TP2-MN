@@ -1,4 +1,5 @@
 #include "mnblas.h"
+#include "complexe.h"
 
 void mncblas_sswap(const int N, float *X, const int incX, 
                  float *Y, const int incY)
@@ -41,17 +42,18 @@ void mncblas_cswap(const int N, void *X, const int incX,
   register unsigned int j = 0 ;
   register float save;
 
-      
+  complexe_float_t saveC = {1.0, 2.0};
   
   for (; ((i < N * 2) && (j < N * 2)) ; i += incX, j+=incY)
     {
-      save = ((float*)Y )[j] ;
+      saveC.real = *((float*)Y[j]);
+      /*save = ((float*)Y )[j] ;
       ((float*)Y )[j] = ((float*)X )[i] ;
       ((float*)X )[i]  = save ;
 
       save = ((float*)Y )[j+1] ;
       ((float*)Y )[j+1] = ((float*)X )[i+1] ;
-      ((float*)X )[i+1] = save ;
+      ((float*)X )[i+1] = save ;*/
     }
   return ;
 }
@@ -65,7 +67,7 @@ void mncblas_zswap(const int N, void *X, const int incX,
 
       
   
-  for (; ((i < N * 2) && (j < N * 2)) ; i += incX, j+=incY)
+  for (; ((i < N * 4) && (j < N * 4)) ; i += incX, j+=incY)
     {
       save = ((double*)Y )[j] ;
       ((double*)Y )[j] = ((double*)X )[i] ;
