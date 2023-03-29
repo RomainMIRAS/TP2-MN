@@ -7,7 +7,7 @@ void mncblas_sgemm(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
                  const int K, const float alpha, const float *A,
                  const int lda, const float *B, const int ldb,
                  const float beta, float *C, const int ldc){
-                    
+
                     
                  }
 

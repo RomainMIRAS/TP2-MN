@@ -36,20 +36,16 @@ void mncblas_dgemv(MNCBLAS_LAYOUT layout,
     int i, j;
     double d;
 
-    for (i = 0; i < N; ++i){
-        Y[i] *= beta;
-    }
-
     #pragma omp parallel for private(d, i, j)
     for (i = 0; i < M; ++i)
     {
         d = 0.0;
-        // alpha * A * x
         for (j = 0; j < N; ++j){
-            d += A[j+i*M] * X[j] * alpha;
+            // alpha * A * x
+            Y[i] += A[j+i*M] * X[j] * alpha + Y[i]*beta;
         }
-        // beta * y
-        Y[i] += d;
+        // // beta * y
+        // Y[i] += d + Y[i]*beta;
     }
 }
 
@@ -72,7 +68,6 @@ void mncblas_cgemv(MNCBLAS_LAYOUT layout,
     for (i = 0; i < N; ++i){
         y[i] = mult_complexe_float(*be, y[i]);
     }
-
 
     #pragma omp parallel for private(d, i, j)
     for (i = 0; i < M; ++i)
