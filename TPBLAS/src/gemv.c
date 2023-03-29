@@ -101,6 +101,7 @@ void mncblas_zgemv(MNCBLAS_LAYOUT layout,
 
     int i, j;
     complexe_double_t d;
+    
 
 
     for (i = 0; i < N; ++i){
