@@ -20,4 +20,8 @@ complexe_float_t div_complexe_float (const complexe_float_t c1, const complexe_f
 
 complexe_double_t div_complexe_double (const complexe_double_t c1, const complexe_double_t c2) ;
 
+complexe_float_t conjuguer_complexe_float (const complexe_float_t c1);
+
+complexe_double_t conjuguer_complexe_double (const complexe_double_t c1);
+
 

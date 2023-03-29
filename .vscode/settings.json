@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "mnblas.h": "c",
-        "gemm.C": "cpp"
+        "gemm.C": "cpp",
+        "complexe.h": "c"
     }
 }

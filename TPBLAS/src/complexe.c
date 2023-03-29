@@ -20,6 +20,26 @@ complexe_double_t add_complexe_double (const complexe_double_t c1, const complex
   return r ;
 }
 
+complexe_float_t conjuguer_complexe_float (const complexe_float_t c1)
+{
+  complexe_float_t r ;
+
+  r.real = c1.real ;
+  r.imaginary = -c1.imaginary;
+  
+  return r ;
+}
+
+complexe_double_t conjuguer_complexe_double (const complexe_double_t c1)
+{
+  complexe_double_t r ;
+
+  r.real = c1.real ;
+  r.imaginary = -c1.imaginary;
+  
+  return r ;
+}
+
 //6 opérations
 complexe_float_t mult_complexe_float (const complexe_float_t c1, const complexe_float_t c2)
 {

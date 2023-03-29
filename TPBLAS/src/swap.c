@@ -40,13 +40,17 @@ void mncblas_cswap(const int N, void *X, const int incX,
 {
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
+
+  register complexe_float_t * Ytab = Y;
+  register complexe_float_t * Xtab = X;
+
   register complexe_float_t saveC;
   
   for (; i < N && j < N ; i += incX, j+=incY)
     {
-      saveC = ((complexe_float_t*)Y )[j];
-      ((complexe_float_t*)Y )[j] = ((complexe_float_t*)X )[i] ;
-      ((complexe_float_t*)X )[i]  = saveC ;
+      saveC = Ytab[j];
+      Ytab[j] = Xtab[i] ;
+      Xtab[i]  = saveC ;
     }
   return ;
 }
@@ -56,13 +60,17 @@ void mncblas_zswap(const int N, void *X, const int incX,
 {
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
+
+  register complexe_double_t * Ytab = Y;
+  register complexe_double_t * Xtab = X;
+
   register complexe_double_t saveC;
   
   for (; i < N && j < N ; i += incX, j+=incY)
     {
-      saveC = ((complexe_double_t*)Y )[j];
-      ((complexe_double_t*)Y )[j] = ((complexe_double_t*)X )[i] ;
-      ((complexe_double_t*)X )[i]  = saveC ;
+      saveC = Ytab[j];
+      Ytab[j] = Xtab[i] ;
+      Xtab[i]  = saveC ;
     }
   return ;
 }

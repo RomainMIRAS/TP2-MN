@@ -349,4 +349,157 @@ int main(int argc, char **argv)
     {
         printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
     }
+
+    printf("==========================================================\n");
+    printf("TEST cdotu COMPLEX FLOAT\n");
+    printf("==========================================================\n");
+
+    init_flop_tsc();
+
+    val5.real = 1.0;
+    val5.imaginary = 2.0;
+    val6.real = 3.0;
+    val6.imaginary = 6.0;
+
+    void * res = malloc(sizeof(complexe_float_t));
+
+    vectorC_init(vec5, val5);
+    vectorC_init(vec6, val6);
+
+    TOP_MICRO(start);
+    mncblas_cdotu_sub(VECSIZE, vec5, 1, vec6, 1, res);
+    TOP_MICRO(end);
+
+    printf("SHOW Z VEC1\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
+    }
+
+    printf("SHOW Z VEC2\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
+    }
+    complexe_float_t *RES = res;
+
+    printf("Result : (%f, %f)\n", RES[0].real, RES[0].imaginary);
+
+    printf("==========================================================\n");
+    printf("TEST cdotc COMPLEX FLOAT\n");
+    printf("==========================================================\n");
+
+    init_flop_tsc();
+
+    val5.real = 1.0;
+    val5.imaginary = 2.0;
+    val6.real = 3.0;
+    val6.imaginary = 6.0;
+
+    void * res2 = malloc(sizeof(complexe_float_t));
+
+    vectorC_init(vec5, val5);
+    vectorC_init(vec6, val6);
+
+    TOP_MICRO(start);
+    mncblas_cdotc_sub(VECSIZE, vec5, 1, vec6, 1, res2);
+    TOP_MICRO(end);
+
+    printf("SHOW Z VEC1\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
+    }
+
+    printf("SHOW Z VEC2\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
+    }
+    complexe_float_t *RES2 = res2;
+
+    printf("Result : (%f, %f)\n", RES2[0].real, RES2[0].imaginary);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    printf("==========================================================\n");
+    printf("TEST zdotu COMPLEX FLOAT\n");
+    printf("==========================================================\n");
+
+    init_flop_tsc();
+
+    val7.real = 1.0;
+    val7.imaginary = 2.0;
+    val8.real = 3.0;
+    val8.imaginary = 6.0;
+
+    void * res3 = malloc(sizeof(complexe_double_t));
+
+    vectorZ_init(vec7, val7);
+    vectorZ_init(vec8, val8);
+
+    TOP_MICRO(start);
+    mncblas_zdotu_sub(VECSIZE, vec7, 1, vec8, 1, res3);
+    TOP_MICRO(end);
+
+    printf("SHOW Z VEC1\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
+    }
+
+    printf("SHOW Z VEC2\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
+    }
+    complexe_double_t *RES3 = res3;
+
+    printf("Result : (%f, %f)\n", RES3[0].real, RES3[0].imaginary);
+
+    printf("==========================================================\n");
+    printf("TEST zdotc COMPLEX FLOAT\n");
+    printf("==========================================================\n");
+
+    init_flop_tsc();
+
+    val7.real = 1.0;
+    val7.imaginary = 2.0;
+    val8.real = 3.0;
+    val8.imaginary = 6.0;
+
+    void * res4 = malloc(sizeof(complexe_double_t));
+
+    vectorZ_init(vec7, val7);
+    vectorZ_init(vec8, val8);
+
+    TOP_MICRO(start);
+    mncblas_zdotc_sub(VECSIZE, vec7, 1, vec8, 1, res4);
+    TOP_MICRO(end);
+
+    printf("SHOW Z VEC1\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
+    }
+
+    printf("SHOW Z VEC2\n");
+    for (size_t i = 0; i < VECSIZE; i++)
+    {
+        printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
+    }
+    complexe_double_t *RES4 = res4;
+
+    printf("Result : (%f, %f)\n", RES4[0].real, RES4[0].imaginary);
 }
