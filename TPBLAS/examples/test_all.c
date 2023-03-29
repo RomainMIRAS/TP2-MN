@@ -13,7 +13,7 @@ typedef double vdouble[VECSIZE];
 
 typedef complexe_float_t vfloatcomplexe[VECSIZE];
 
-typedef complexe_double_t vdoublecomplexe[VECSIZE];//
+typedef complexe_double_t vdoublecomplexe[VECSIZE];
 
 void vectorF_init(vfloat V, float x)
 {

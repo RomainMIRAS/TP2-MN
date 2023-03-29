@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "mnblas.h": "c"
+        "mnblas.h": "c",
+        "gemm.C": "cpp"
     }
 }
