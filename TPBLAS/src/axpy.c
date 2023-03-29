@@ -1,4 +1,5 @@
 #include "mnblas.h"
+#include "complexe.h"
 
 void mnblas_saxpy(const int N, const float alpha, const float *X, const int incX, float *Y, const int incY)
 {
@@ -45,12 +46,11 @@ void mnblas_zaxpy(const int N, const void *alpha, const void *X,
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
 
-  double Falpha = (*(double*)alpha);
+  complexe_double_t Dalpha = *((complexe_double_t *)alpha);
   
   for (; ((i <= N) && (j <= N)) ; i += incX, j+=incY)
     {
-      ((double*)Y )[j] = ((double*)X )[i] * Falpha + ((double*)Y )[j];
-      ((double*)Y )[j+1] = ((double*)X )[i+1] * Falpha + ((double*)Y )[j+1];
+      ((complexe_double_t*)Y )[j] = mult_complexe_double((*(complexe_double_t *)X[i]) ,alpha) + ((double*)Y )[j];
     }
-  return ;
+  return;
 }
