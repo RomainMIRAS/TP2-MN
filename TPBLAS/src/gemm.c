@@ -8,18 +8,18 @@ void mncblas_sgemm(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
                    const int lda, const float *B, const int ldb,
                    const float beta, float *C, const int ldc)
 {
-
+    // C = A*B*alpha + C*Beta
     int i, j, k;
     float d;
 
     #pragma omp parallel for private(d, i, j, k)
-    for (i = 0; i < M; ++i)
+    for (i = 0; i < M; i++)
     {
-        for (j = 0; j < M; ++j)
+        for (j = 0; j < M; j++)
         {
             d = 0.0;
-            for (k = 0; k < M; ++k)
-                d += A[i * M + k] * B[k + M * j] * alpha;
+            for (k = 0; k < M; k++)
+                d += A[i * M + k] * B[ k * M + j] * alpha;
             C[i * M + j] = d + beta * C[i * M + j];
         }
     }
@@ -38,11 +38,11 @@ void mncblas_dgemm(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
     #pragma omp parallel for private(d, i, j, k)
     for (i = 0; i < M; ++i)
     {
-        for (j = 0; j < M; ++j)
+        for (j = 0; j < M; j++)
         {
             d = 0.0;
-            for (k = 0; k < M; ++k)
-                d += A[i * M + k] * B[k + M * j] * alpha;
+            for (k = 0; k < M; k++)
+                d += A[i * M + k] * B[k * M + j] * alpha;
             C[i * M + j] = d + beta * C[i * M + j];
         }
     }
@@ -65,15 +65,15 @@ void mncblas_cgemm(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
 
 
     #pragma omp parallel for private(d, i, j, k)
-    for (i = 0; i < M; ++i)
+    for (i = 0; i < M; i++)
     {
-        for (j = 0; j < M; ++j)
+        for (j = 0; j < M; j++)
         {
             d .imaginary= 0.0;
             d .real= 0.0;
             
-            for (k = 0; k < M; ++k){
-                d =add_complexe_float(d,mult_complexe_float(mult_complexe_float(a[i * M + k], b[k + M * j]), *al));
+            for (k = 0; k < M; k++){
+                d =add_complexe_float(d,mult_complexe_float(mult_complexe_float(a[i * M + k], b[k * M + j]), *al));
             }
             c[i * M + j] = add_complexe_float(d,mult_complexe_float(*be,c[i * M + j]));
         }
@@ -100,15 +100,15 @@ void mncblas_zgemm(MNCBLAS_LAYOUT layout, MNCBLAS_TRANSPOSE TransA,
 
 
     #pragma omp parallel for private(d, i, j, k)
-    for (i = 0; i < M; ++i)
+    for (i = 0; i < M; i++)
     {
-        for (j = 0; j < M; ++j)
+        for (j = 0; j < M; j++)
         {
             d .imaginary= 0.0;
             d .real= 0.0;
             
-            for (k = 0; k < M; ++k){
-                d =add_complexe_double(d,mult_complexe_double(mult_complexe_double(a[i * M + k], b[k + M * j]), *al));
+            for (k = 0; k < M; k++){
+                d =add_complexe_double(d,mult_complexe_double(mult_complexe_double(a[i * M + k], b[k * M + j]), *al));
             }
             c[i * M + j] = add_complexe_double(d,mult_complexe_double(*be,c[i * M + j]));
         }

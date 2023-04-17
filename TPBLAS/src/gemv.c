@@ -16,10 +16,10 @@ void mncblas_sgemv(const MNCBLAS_LAYOUT layout,
 
     #pragma omp parallel for private(d, i, j)
     // alpha * A * x
-    for (i = 0; i < M; ++i)
+    for (i = 0; i < M; i++)
     {
         d = 0.0;
-        for (j = 0; j < N; ++j){
+        for (j = 0; j < N; j++){
             d += A[j+i*N] * X[j] * alpha;
         }
         // beta * y
@@ -34,17 +34,15 @@ void mncblas_dgemv(MNCBLAS_LAYOUT layout,
                    double *Y, const int incY)
 {
     int i, j;
-    double d;
 
-    #pragma omp parallel for private(d, i, j)
-    for (i = 0; i < M; ++i)
+    #pragma omp parallel for private(i, j)
+    for (i = 0; i < M; i++)
     {
-        d = 0.0;
-        for (j = 0; j < N; ++j){
+        for (j = 0; j < N; j++){
             // alpha * A * x
             Y[i] += A[j+i*M] * X[j] * alpha + Y[i]*beta;
         }
-        // // beta * y
+        // beta * y
         // Y[i] += d + Y[i]*beta;
     }
 }
@@ -65,17 +63,17 @@ void mncblas_cgemv(MNCBLAS_LAYOUT layout,
     complexe_float_t d;
 
 
-    for (i = 0; i < N; ++i){
+    for (i = 0; i < N; i++){
         y[i] = mult_complexe_float(*be, y[i]);
     }
 
     #pragma omp parallel for private(d, i, j)
-    for (i = 0; i < M; ++i)
+    for (i = 0; i < M; i++)
     {
         d.real = 0.0;
         d.imaginary = 0.0;
         // alpha * A * x
-        for (j = 0; j < N; ++j){
+        for (j = 0; j < N; j++){
             d = add_complexe_float(d,mult_complexe_float(mult_complexe_float(a[j+i*M], x[j]), *al));
         }
         // beta * y
@@ -104,18 +102,18 @@ void mncblas_zgemv(MNCBLAS_LAYOUT layout,
     
 
 
-    for (i = 0; i < N; ++i){
+    for (i = 0; i < N; i++){
         y[i] = mult_complexe_double(*be, y[i]);
     }
 
 
     #pragma omp parallel for private(d, i, j)
-    for (i = 0; i < M; ++i)
+    for (i = 0; i < M; i++)
     {
         d.real = 0.0;
         d.imaginary = 0.0;
         // alpha * A * x
-        for (j = 0; j < N; ++j){
+        for (j = 0; j < N; j++){
             d = add_complexe_double(d,mult_complexe_double(mult_complexe_double(a[j+i*M], x[j]), *al));
         }
         // beta * y
