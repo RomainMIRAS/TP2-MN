@@ -5,8 +5,8 @@
 
 #include "flop.h"
 
-#define VECSIZE 10
-#define NB_FOIS 1
+#define VECSIZE 512
+#define NB_FOIS 1024
 
 typedef float vfloat[VECSIZE];
 
@@ -571,37 +571,33 @@ int main(int argc, char **argv)
 
     // printf("Result : (%f, %f)\n", RES4[0].real, RES4[0].imaginary);
 
-    // printf("==========================================================\n");
-    // printf("TEST GEMV FLOAT\n");
-    // printf("==========================================================\n");
+    printf("==========================================================\n");
+    printf("TEST GEMV FLOAT\n");
+    printf("==========================================================\n");
 
-    // vfloat vec9, vec10;
-    // mfloat mat4;
+    vfloat vec9, vec10;
+    mfloat mat4;
 
-    // init_flop_tsc();
-    // val1 = 3.0;
-    // val2 = 4.0;
-    // // vectorF_init(vec1, val1);
-    // // vectorF_init(vec2, val2);
-    // matrixF_init(mat4, val1); // INIT A
-    // vectorF_init(vec9, val2); // INIT X
-    // vectorF_init(vec10, 1.0); // INIT Y
+    val1 = 3.0;
+    val2 = 4.0;
 
-    // TOP_MICRO(start);
-    // // AMPHA 2 et BETA 5
-    // mncblas_sgemv(MNCblasRowMajor,MNCblasNoTrans,VECSIZE,VECSIZE,2,mat4, 1, vec9, 1,5,vec10,0); 
-    // TOP_MICRO(end);
 
-    // printf("SHOW F GEMV\n");
-    // for (size_t i = 0; i < VECSIZE; i++)
-    // {
-    //     printf("VEC GEMV:%ld : %f\n", i, vec10[i]);
-    // }
+    matrixF_init(mat4, val1); // INIT A
+    vectorF_init(vec9, val2); // INIT X
+    vectorF_init(vec10, 1.0); // INIT Y
+
+    TOP_MICRO(start);
+    // AMPHA 2 et BETA 5
+           for(size_t i = 0; i < NB_FOIS; i++)
+                mncblas_sgemv(MNCblasRowMajor,MNCblasNoTrans,VECSIZE,VECSIZE,2,mat4, 1, vec9, 1,5,vec10,0); 
+    TOP_MICRO(end);
+
+    calcul_flop_micro("sgemv micro", NB_FOIS*(5*(VECSIZE^2) + 4*VECSIZE), tdiff_micro(&start, &end));
+
 
     // printf("==========================================================\n");
     // printf("TEST GEMM FLOAT\n");
     // printf("==========================================================\n");
-
 
     // mfloat mat1, mat2, mat3;
 

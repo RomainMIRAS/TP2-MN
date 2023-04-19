@@ -24,8 +24,8 @@ float mncblas_sdot(const int N, const float *X, const int incX,
                  const float *Y, const int incY)
 {
   float dot = 0;
-  int i ;
-  #pragma parallel omp for private (i) reduction (+:dot)  
+  register unsigned int i; 
+  #pragma omp parallel for private(i)
   for (i = 0;i < N; i++)
     {
       dot += Y[i]*X[i];

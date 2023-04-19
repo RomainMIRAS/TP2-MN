@@ -7,11 +7,10 @@ void mncblas_scopy(const int N, const float *X, const int incX,
                  float *Y, const int incY)
 {
   register unsigned int i; 
-  #pragma omp parallel for
+  #pragma omp parallel for private(i)
   for (i = 0;i < N; i ++)
     {
       Y [i] = X [i] ;
-      printf("Indice %d\n",i);
     }
 
   return ;
