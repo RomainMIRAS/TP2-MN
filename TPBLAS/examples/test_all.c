@@ -190,7 +190,7 @@ int main(int argc, char **argv)
 
     TOP_MICRO(start);
     for(size_t i = 0; i < NB_FOIS; i++)
-        mncblas_scopy(VECSIZE, vec1, 1, vec2, 1);
+        mncblas_sdot(VECSIZE,vec1, 1, vec2, 1);
     TOP_MICRO(end);
 
     // printf("SHOW F VEC1\n");
@@ -205,7 +205,7 @@ int main(int argc, char **argv)
     //     printf("VEC 2:%ld : %f\n", i, vec2[i]);
     // }
 
-    calcul_flop_micro("scopy micro", 2 * VECSIZE*NB_FOIS, tdiff_micro(&start, &end));
+    calcul_flop_micro("scopy micro", VECSIZE*NB_FOIS*2, tdiff_micro(&start, &end));
 
     // printf("==========================================================\n");
     // printf("TEST D\n");
@@ -592,7 +592,7 @@ int main(int argc, char **argv)
                 mncblas_sgemv(MNCblasRowMajor,MNCblasNoTrans,VECSIZE,VECSIZE,2,mat4, 1, vec9, 1,5,vec10,0); 
     TOP_MICRO(end);
 
-    calcul_flop_micro("sgemv micro", NB_FOIS*(5*(VECSIZE^2) + 4*VECSIZE), tdiff_micro(&start, &end));
+    calcul_flop_micro("sgemv micro", NB_FOIS*(3*(VECSIZE^2) + 2*VECSIZE), tdiff_micro(&start, &end));
 
 
     // printf("==========================================================\n");
