@@ -1,4 +1,4 @@
-all: test_all test_complexe4 test_complexe3 test_complexe2 test_complexe test_dot test_dot_dyn  test_copy test_copy_dyn test_swap test_swap_dyn
+all: test_all test_all_dyn test_complexe4 test_complexe2 test_complexe test_dot test_dot_dyn test_swap test_swap_dyn
 
 INC_DIR=../include
 
@@ -20,7 +20,6 @@ test_swap: test_swap.o flop.o $(LIB_DIR)/libmnblas.a
 
 test_swap_dyn: test_swap.o flop.o
 	gcc -o test_swap_dyn flop.o test_swap.o $(OPTIONS_LINK_DYN)
-
 
 test_all_dyn: test_all.o flop.o
 	gcc -o test_all_dyn flop.o test_all.o $(OPTIONS_LINK_DYN)
@@ -76,7 +75,6 @@ test_complexe4.o: test_complexe4.c  $(INC_DIR)/complexe2.h
 
 test_complexe4: test_complexe4.o flop.o
 	gcc -o test_complexe4 test_complexe4.o flop.o $(OPTIONS_LINK_STATIC)
-
 
 clean:
 	rm -f *.o test_dot test_dot_dyn test_complexe test_complexe2 test_complexe3 test_complexe4 *~

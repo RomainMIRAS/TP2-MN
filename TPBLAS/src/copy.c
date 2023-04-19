@@ -6,7 +6,7 @@ void mncblas_scopy(const int N, const float *X, const int incX,
 {
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
-
+  
   for (; ((i < N) && (j < N)) ; i += incX, j += incY)
     {
       Y [j] = X [i] ;
@@ -36,7 +36,7 @@ void mncblas_ccopy(const int N, const void *X, const int incX,
   register unsigned int j = 0 ;
 
   register complexe_double_t * Ytab = Y;
-  register complexe_double_t * Xtab = X;
+  register const complexe_double_t * Xtab = X;
   
   for (; i < N && j < N ; i += incX, j+=incY)
     {
@@ -52,7 +52,7 @@ void mncblas_zcopy(const int N, const void *X, const int incX,
   register unsigned int j = 0 ;
 
   register complexe_double_t * Ytab = Y;
-  register complexe_double_t * Xtab = X;
+  register const complexe_double_t * Xtab = X;
   
   for (; i < N && j < N ; i += incX, j+=incY)
     {

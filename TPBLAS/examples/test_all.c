@@ -5,7 +5,8 @@
 
 #include "flop.h"
 
-#define VECSIZE 3
+#define VECSIZE 2048
+#define NB_FOIS 1024
 
 typedef float vfloat[VECSIZE];
 
@@ -188,435 +189,436 @@ int main(int argc, char **argv)
     vectorF_init(vec2, val2);
 
     TOP_MICRO(start);
-    mncblas_scopy(VECSIZE, vec1, 1, vec2, 1);
+    for(size_t i = 0; i < NB_FOIS; i++)
+        mncblas_scopy(VECSIZE, vec1, 1, vec2, 1);
     TOP_MICRO(end);
 
-    printf("SHOW F VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f\n", i, vec1[i]);
-    }
+    // printf("SHOW F VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f\n", i, vec1[i]);
+    // }
 
-    printf("SHOW F VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f\n", i, vec2[i]);
-    }
+    // printf("SHOW F VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f\n", i, vec2[i]);
+    // }
 
-    calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
+    calcul_flop_micro("scopy micro", 2 * VECSIZE*NB_FOIS, tdiff_micro(&start, &end));
 
-    printf("==========================================================\n");
-    printf("TEST D\n");
-    printf("==========================================================\n");
+    // printf("==========================================================\n");
+    // printf("TEST D\n");
+    // printf("==========================================================\n");
 
-    vdouble vec3, vec4;
+    // vdouble vec3, vec4;
 
-    init_flop_tsc();
-    double val3 = 3.0;
-    double val4 = 5.0;
+    // init_flop_tsc();
+    // double val3 = 3.0;
+    // double val4 = 5.0;
 
-    vectorD_init(vec3, val3);
+    // vectorD_init(vec3, val3);
 
-    vectorD_init(vec4, val4);
+    // vectorD_init(vec4, val4);
 
-    TOP_MICRO(start);
-    mncblas_dcopy(VECSIZE, vec3, 1, vec4, 1);
-    TOP_MICRO(end);
+    // TOP_MICRO(start);
+    // mncblas_dcopy(VECSIZE, vec3, 1, vec4, 1);
+    // TOP_MICRO(end);
 
-    printf("SHOW D VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f\n", i, vec3[i]);
-    }
+    // printf("SHOW D VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f\n", i, vec3[i]);
+    // }
 
-    printf("SHOW D VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f\n", i, vec4[i]);
-    }
+    // printf("SHOW D VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f\n", i, vec4[i]);
+    // }
 
-    calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
+    // calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
 
-    printf("==========================================================\n");
-    printf("TEST C\n");
-    printf("==========================================================\n");
+    // printf("==========================================================\n");
+    // printf("TEST C\n");
+    // printf("==========================================================\n");
 
-    vfloatcomplexe vec5, vec6;
+    // vfloatcomplexe vec5, vec6;
 
-    init_flop_tsc();
-    complexe_float_t val5 = {1.0, 2.0};
-    complexe_float_t val6 = {3.0, 6.0};
+    // init_flop_tsc();
+    // complexe_float_t val5 = {1.0, 2.0};
+    // complexe_float_t val6 = {3.0, 6.0};
 
-    vectorC_init(vec5, val5);
+    // vectorC_init(vec5, val5);
 
-    vectorC_init(vec6, val6);
+    // vectorC_init(vec6, val6);
 
-    TOP_MICRO(start);
-    mncblas_ccopy(VECSIZE, vec5, 1, vec6, 1);
-    TOP_MICRO(end);
+    // TOP_MICRO(start);
+    // mncblas_ccopy(VECSIZE, vec5, 1, vec6, 1);
+    // TOP_MICRO(end);
 
-    printf("SHOW C VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
-    }
+    // printf("SHOW C VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
+    // }
 
-    printf("SHOW C VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
-    }
+    // printf("SHOW C VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
+    // }
 
-    printf("==========================================================\n");
-    printf("TEST Z\n");
-    printf("==========================================================\n");
+    // printf("==========================================================\n");
+    // printf("TEST Z\n");
+    // printf("==========================================================\n");
 
-    vdoublecomplexe vec7, vec8;
+    // vdoublecomplexe vec7, vec8;
 
-    init_flop_tsc();
-    complexe_double_t val7 = {1.0, 2.0};
-    complexe_double_t val8 = {3.0, 6.0};
+    // init_flop_tsc();
+    // complexe_double_t val7 = {1.0, 2.0};
+    // complexe_double_t val8 = {3.0, 6.0};
 
-    vectorZ_init(vec7, val7);
-    vectorZ_init(vec8, val8);
+    // vectorZ_init(vec7, val7);
+    // vectorZ_init(vec8, val8);
 
-    TOP_MICRO(start);
-    mncblas_zcopy(VECSIZE, vec7, 1, vec8, 1);
-    TOP_MICRO(end);
+    // TOP_MICRO(start);
+    // mncblas_zcopy(VECSIZE, vec7, 1, vec8, 1);
+    // TOP_MICRO(end);
 
-    printf("SHOW Z VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
-    }
+    // printf("SHOW Z VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
+    // }
 
-    printf("SHOW Z VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
-    }
+    // printf("SHOW Z VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
+    // }
 
 
-    init_flop_tsc();
-    printf("==========================================================\n");
-    printf("TEST SWAP FLOAT\n");
-    printf("==========================================================\n");
+    // init_flop_tsc();
+    // printf("==========================================================\n");
+    // printf("TEST SWAP FLOAT\n");
+    // printf("==========================================================\n");
 
-    init_flop_tsc();
-    val1 = 1.0;
-    val2 = 3.0;
+    // init_flop_tsc();
+    // val1 = 1.0;
+    // val2 = 3.0;
 
-    vectorF_init(vec1, val1);
-
-    vectorF_init(vec2, val2);
-
-    TOP_MICRO(start);
-    mncblas_sswap(VECSIZE, vec1, 1, vec2, 1);
-    TOP_MICRO(end);
-
-    printf("SHOW F VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f\n", i, vec1[i]);
-    }
-
-    printf("SHOW F VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f\n", i, vec2[i]);
-    }
-
-    calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
-
-    printf("==========================================================\n");
-    printf("TEST SWAP DOUBLE\n");
-    printf("==========================================================\n");
-
-    init_flop_tsc();
-    val3 = 1.0;
-    val4 = 3.0;
-
-    vectorD_init(vec3, val3);
-
-    vectorD_init(vec4, val4);
-
-    TOP_MICRO(start);
-    mncblas_dswap(VECSIZE, vec3, 1, vec4, 1);
-    TOP_MICRO(end);
-
-    printf("SHOW D VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f\n", i, vec3[i]);
-    }
-
-    printf("SHOW D VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f\n", i, vec4[i]);
-    }
-
-    calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
-
-    printf("==========================================================\n");
-    printf("TEST SWAP COMPLEX FLOAT\n");
-    printf("==========================================================\n");
-
-    init_flop_tsc();
-
-    vectorC_init(vec5, val5);
-
-    vectorC_init(vec6, val6);
-
-    TOP_MICRO(start);
-    mncblas_cswap(VECSIZE, vec5, 1, vec6, 1);
-    TOP_MICRO(end);
-
-    printf("SHOW C VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
-    }
-
-    printf("SHOW C VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
-    }
-
-    calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
-
-    printf("==========================================================\n");
-    printf("TEST SWAP COMPLEX DOUBLE\n");
-    printf("==========================================================\n");
-
-    init_flop_tsc();
-
-    val7.real = 1.0;
-    val7.imaginary = 2.0;
-    val8.real = 3.0;
-    val8.imaginary = 6.0;
-
-    vectorZ_init(vec7, val7);
-    vectorZ_init(vec8, val8);
-
-    TOP_MICRO(start);
-    mncblas_zswap(VECSIZE, vec7, 1, vec8, 1);
-    TOP_MICRO(end);
-
-    printf("SHOW Z VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
-    }
-
-    printf("SHOW Z VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
-    }
-
-    printf("==========================================================\n");
-    printf("TEST cdotu COMPLEX FLOAT\n");
-    printf("==========================================================\n");
-
-    init_flop_tsc();
-
-    val5.real = 1.0;
-    val5.imaginary = 2.0;
-    val6.real = 3.0;
-    val6.imaginary = 6.0;
-
-    void * res = malloc(sizeof(complexe_float_t));
-
-    vectorC_init(vec5, val5);
-    vectorC_init(vec6, val6);
-
-    TOP_MICRO(start);
-    mncblas_cdotu_sub(VECSIZE, vec5, 1, vec6, 1, res);
-    TOP_MICRO(end);
-
-    printf("SHOW Z VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
-    }
-
-    printf("SHOW Z VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
-    }
-    complexe_float_t *RES = res;
-
-    printf("Result : (%f, %f)\n", RES[0].real, RES[0].imaginary);
-
-    printf("==========================================================\n");
-    printf("TEST cdotc COMPLEX FLOAT\n");
-    printf("==========================================================\n");
-
-    init_flop_tsc();
-
-    val5.real = 1.0;
-    val5.imaginary = 2.0;
-    val6.real = 3.0;
-    val6.imaginary = 6.0;
-
-    void * res2 = malloc(sizeof(complexe_float_t));
-
-    vectorC_init(vec5, val5);
-    vectorC_init(vec6, val6);
-
-    TOP_MICRO(start);
-    mncblas_cdotc_sub(VECSIZE, vec5, 1, vec6, 1, res2);
-    TOP_MICRO(end);
-
-    printf("SHOW Z VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
-    }
-
-    printf("SHOW Z VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
-    }
-    complexe_float_t *RES2 = res2;
-
-    printf("Result : (%f, %f)\n", RES2[0].real, RES2[0].imaginary);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    printf("==========================================================\n");
-    printf("TEST zdotu COMPLEX FLOAT\n");
-    printf("==========================================================\n");
-
-    init_flop_tsc();
-
-    val7.real = 1.0;
-    val7.imaginary = 2.0;
-    val8.real = 3.0;
-    val8.imaginary = 6.0;
-
-    void * res3 = malloc(sizeof(complexe_double_t));
-
-    vectorZ_init(vec7, val7);
-    vectorZ_init(vec8, val8);
-
-    TOP_MICRO(start);
-    mncblas_zdotu_sub(VECSIZE, vec7, 1, vec8, 1, res3);
-    TOP_MICRO(end);
-
-    printf("SHOW Z VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
-    }
-
-    printf("SHOW Z VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
-    }
-    complexe_double_t *RES3 = res3;
-
-    printf("Result : (%f, %f)\n", RES3[0].real, RES3[0].imaginary);
-
-    printf("==========================================================\n");
-    printf("TEST zdotc COMPLEX FLOAT\n");
-    printf("==========================================================\n");
-
-    init_flop_tsc();
-
-    val7.real = 1.0;
-    val7.imaginary = 2.0;
-    val8.real = 3.0;
-    val8.imaginary = 6.0;
-
-    void * res4 = malloc(sizeof(complexe_double_t));
-
-    vectorZ_init(vec7, val7);
-    vectorZ_init(vec8, val8);
-
-    TOP_MICRO(start);
-    mncblas_zdotc_sub(VECSIZE, vec7, 1, vec8, 1, res4);
-    TOP_MICRO(end);
-
-    printf("SHOW Z VEC1\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
-    }
-
-    printf("SHOW Z VEC2\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
-    }
-    complexe_double_t *RES4 = res4;
-
-    printf("Result : (%f, %f)\n", RES4[0].real, RES4[0].imaginary);
-
-    printf("==========================================================\n");
-    printf("TEST GEMV FLOAT\n");
-    printf("==========================================================\n");
-
-    vfloat vec9, vec10;
-    mfloat mat4;
-
-    init_flop_tsc();
-    val1 = 3.0;
-    val2 = 4.0;
     // vectorF_init(vec1, val1);
+
     // vectorF_init(vec2, val2);
-    matrixF_init(mat4, val1); // INIT A
-    vectorF_init(vec9, val2); // INIT X
-    vectorF_init(vec10, 1.0); // INIT Y
 
-    TOP_MICRO(start);
-    // AMPHA 2 et BETA 5
-    mncblas_sgemv(MNCblasRowMajor,MNCblasNoTrans,VECSIZE,VECSIZE,2,mat4, 1, vec9, 1,5,vec10,0); 
-    TOP_MICRO(end);
+    // TOP_MICRO(start);
+    // mncblas_sswap(VECSIZE, vec1, 1, vec2, 1);
+    // TOP_MICRO(end);
 
-    printf("SHOW F GEMV\n");
-    for (size_t i = 0; i < VECSIZE; i++)
-    {
-        printf("VEC GEMV:%ld : %f\n", i, vec10[i]);
-    }
+    // printf("SHOW F VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f\n", i, vec1[i]);
+    // }
 
-    printf("==========================================================\n");
-    printf("TEST GEMM FLOAT\n");
-    printf("==========================================================\n");
+    // printf("SHOW F VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f\n", i, vec2[i]);
+    // }
+
+    // calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
+
+    // printf("==========================================================\n");
+    // printf("TEST SWAP DOUBLE\n");
+    // printf("==========================================================\n");
+
+    // init_flop_tsc();
+    // val3 = 1.0;
+    // val4 = 3.0;
+
+    // vectorD_init(vec3, val3);
+
+    // vectorD_init(vec4, val4);
+
+    // TOP_MICRO(start);
+    // mncblas_dswap(VECSIZE, vec3, 1, vec4, 1);
+    // TOP_MICRO(end);
+
+    // printf("SHOW D VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f\n", i, vec3[i]);
+    // }
+
+    // printf("SHOW D VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f\n", i, vec4[i]);
+    // }
+
+    // calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
+
+    // printf("==========================================================\n");
+    // printf("TEST SWAP COMPLEX FLOAT\n");
+    // printf("==========================================================\n");
+
+    // init_flop_tsc();
+
+    // vectorC_init(vec5, val5);
+
+    // vectorC_init(vec6, val6);
+
+    // TOP_MICRO(start);
+    // mncblas_cswap(VECSIZE, vec5, 1, vec6, 1);
+    // TOP_MICRO(end);
+
+    // printf("SHOW C VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
+    // }
+
+    // printf("SHOW C VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
+    // }
+
+    // calcul_flop_micro("sdot micro", 2 * VECSIZE, tdiff_micro(&start, &end));
+
+    // printf("==========================================================\n");
+    // printf("TEST SWAP COMPLEX DOUBLE\n");
+    // printf("==========================================================\n");
+
+    // init_flop_tsc();
+
+    // val7.real = 1.0;
+    // val7.imaginary = 2.0;
+    // val8.real = 3.0;
+    // val8.imaginary = 6.0;
+
+    // vectorZ_init(vec7, val7);
+    // vectorZ_init(vec8, val8);
+
+    // TOP_MICRO(start);
+    // mncblas_zswap(VECSIZE, vec7, 1, vec8, 1);
+    // TOP_MICRO(end);
+
+    // printf("SHOW Z VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
+    // }
+
+    // printf("SHOW Z VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
+    // }
+
+    // printf("==========================================================\n");
+    // printf("TEST cdotu COMPLEX FLOAT\n");
+    // printf("==========================================================\n");
+
+    // init_flop_tsc();
+
+    // val5.real = 1.0;
+    // val5.imaginary = 2.0;
+    // val6.real = 3.0;
+    // val6.imaginary = 6.0;
+
+    // void * res = malloc(sizeof(complexe_float_t));
+
+    // vectorC_init(vec5, val5);
+    // vectorC_init(vec6, val6);
+
+    // TOP_MICRO(start);
+    // mncblas_cdotu_sub(VECSIZE, vec5, 1, vec6, 1, res);
+    // TOP_MICRO(end);
+
+    // printf("SHOW Z VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
+    // }
+
+    // printf("SHOW Z VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
+    // }
+    // complexe_float_t *RES = res;
+
+    // printf("Result : (%f, %f)\n", RES[0].real, RES[0].imaginary);
+
+    // printf("==========================================================\n");
+    // printf("TEST cdotc COMPLEX FLOAT\n");
+    // printf("==========================================================\n");
+
+    // init_flop_tsc();
+
+    // val5.real = 1.0;
+    // val5.imaginary = 2.0;
+    // val6.real = 3.0;
+    // val6.imaginary = 6.0;
+
+    // void * res2 = malloc(sizeof(complexe_float_t));
+
+    // vectorC_init(vec5, val5);
+    // vectorC_init(vec6, val6);
+
+    // TOP_MICRO(start);
+    // mncblas_cdotc_sub(VECSIZE, vec5, 1, vec6, 1, res2);
+    // TOP_MICRO(end);
+
+    // printf("SHOW Z VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f ; %fi\n", i, vec5[i].real, vec5[i].imaginary);
+    // }
+
+    // printf("SHOW Z VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f ; %fi\n", i, vec6[i].real, vec6[i].imaginary);
+    // }
+    // complexe_float_t *RES2 = res2;
+
+    // printf("Result : (%f, %f)\n", RES2[0].real, RES2[0].imaginary);
 
 
-    mfloat mat1, mat2, mat3;
 
-    init_flop_tsc();
-    float valM3 = 1.0;
-    val1 = 2.0;
-    val2 = 3.0;
-    // vectorF_init(vec1, val1);
-    // vectorF_init(vec2, val2);
-    matrixF_init(mat1, val1);
-    matrixF_init(mat2, val2);
-    matrixF_init(mat3, valM3);
 
-    TOP_MICRO(start);
-    mncblas_sgemm(MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,VECSIZE,VECSIZE,VECSIZE,2,mat1, 1, mat2, 1,5,mat3,0); // AMPHA 2 et BETA 5
-    TOP_MICRO(end);
 
-    printf("SHOW F MAT3\n");
-    show_matrixF(mat3);
+
+
+
+
+
+
+
+
+
+    // printf("==========================================================\n");
+    // printf("TEST zdotu COMPLEX FLOAT\n");
+    // printf("==========================================================\n");
+
+    // init_flop_tsc();
+
+    // val7.real = 1.0;
+    // val7.imaginary = 2.0;
+    // val8.real = 3.0;
+    // val8.imaginary = 6.0;
+
+    // void * res3 = malloc(sizeof(complexe_double_t));
+
+    // vectorZ_init(vec7, val7);
+    // vectorZ_init(vec8, val8);
+
+    // TOP_MICRO(start);
+    // mncblas_zdotu_sub(VECSIZE, vec7, 1, vec8, 1, res3);
+    // TOP_MICRO(end);
+
+    // printf("SHOW Z VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
+    // }
+
+    // printf("SHOW Z VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
+    // }
+    // complexe_double_t *RES3 = res3;
+
+    // printf("Result : (%f, %f)\n", RES3[0].real, RES3[0].imaginary);
+
+    // printf("==========================================================\n");
+    // printf("TEST zdotc COMPLEX FLOAT\n");
+    // printf("==========================================================\n");
+
+    // init_flop_tsc();
+
+    // val7.real = 1.0;
+    // val7.imaginary = 2.0;
+    // val8.real = 3.0;
+    // val8.imaginary = 6.0;
+
+    // void * res4 = malloc(sizeof(complexe_double_t));
+
+    // vectorZ_init(vec7, val7);
+    // vectorZ_init(vec8, val8);
+
+    // TOP_MICRO(start);
+    // mncblas_zdotc_sub(VECSIZE, vec7, 1, vec8, 1, res4);
+    // TOP_MICRO(end);
+
+    // printf("SHOW Z VEC1\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 1:%ld : %f ; %fi\n", i, vec7[i].real, vec7[i].imaginary);
+    // }
+
+    // printf("SHOW Z VEC2\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC 2:%ld : %f ; %fi\n", i, vec8[i].real, vec8[i].imaginary);
+    // }
+    // complexe_double_t *RES4 = res4;
+
+    // printf("Result : (%f, %f)\n", RES4[0].real, RES4[0].imaginary);
+
+    // printf("==========================================================\n");
+    // printf("TEST GEMV FLOAT\n");
+    // printf("==========================================================\n");
+
+    // vfloat vec9, vec10;
+    // mfloat mat4;
+
+    // init_flop_tsc();
+    // val1 = 3.0;
+    // val2 = 4.0;
+    // // vectorF_init(vec1, val1);
+    // // vectorF_init(vec2, val2);
+    // matrixF_init(mat4, val1); // INIT A
+    // vectorF_init(vec9, val2); // INIT X
+    // vectorF_init(vec10, 1.0); // INIT Y
+
+    // TOP_MICRO(start);
+    // // AMPHA 2 et BETA 5
+    // mncblas_sgemv(MNCblasRowMajor,MNCblasNoTrans,VECSIZE,VECSIZE,2,mat4, 1, vec9, 1,5,vec10,0); 
+    // TOP_MICRO(end);
+
+    // printf("SHOW F GEMV\n");
+    // for (size_t i = 0; i < VECSIZE; i++)
+    // {
+    //     printf("VEC GEMV:%ld : %f\n", i, vec10[i]);
+    // }
+
+    // printf("==========================================================\n");
+    // printf("TEST GEMM FLOAT\n");
+    // printf("==========================================================\n");
+
+
+    // mfloat mat1, mat2, mat3;
+
+    // init_flop_tsc();
+    // float valM3 = 1.0;
+    // val1 = 2.0;
+    // val2 = 3.0;
+    // // vectorF_init(vec1, val1);
+    // // vectorF_init(vec2, val2);
+    // matrixF_init(mat1, val1);
+    // matrixF_init(mat2, val2);
+    // matrixF_init(mat3, valM3);
+
+    // TOP_MICRO(start);
+    // mncblas_sgemm(MNCblasRowMajor,MNCblasNoTrans,MNCblasNoTrans,VECSIZE,VECSIZE,VECSIZE,2,mat1, 1, mat2, 1,5,mat3,0); // AMPHA 2 et BETA 5
+    // TOP_MICRO(end);
+
+    // printf("SHOW F MAT3\n");
+    // show_matrixF(mat3);
 }

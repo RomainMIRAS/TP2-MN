@@ -5,8 +5,8 @@ void mnblas_saxpy(const int N, const float alpha, const float *X, const int incX
 {
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
-
-  for (; ((i < N) && (j < N)) ; i += incX, j += incY)
+  
+  for (; ((i < N) && (j < N)) ; i += incX)
     {
     Y[i] = alpha * X[i] + Y[i];
     }
