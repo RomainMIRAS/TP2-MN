@@ -5,8 +5,8 @@
 
 #include "flop.h"
 
-#define VECSIZE 2048
-#define NB_FOIS 1024
+#define VECSIZE 10
+#define NB_FOIS 1
 
 typedef float vfloat[VECSIZE];
 
@@ -175,7 +175,7 @@ int main(int argc, char **argv)
 
     init_flop_tsc();
     printf("==========================================================\n");
-    printf("TEST F\n");
+    printf("TEST F BLAS1 \n");
     printf("==========================================================\n");
 
     vfloat vec1, vec2;

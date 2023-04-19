@@ -3,6 +3,7 @@
         "mnblas.h": "c",
         "gemm.C": "cpp",
         "complex.h": "c",
-        "complexe.h": "c"
+        "complexe.h": "c",
+        "omp.h": "c"
     }
 }

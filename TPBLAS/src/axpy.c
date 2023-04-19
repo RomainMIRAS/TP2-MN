@@ -1,11 +1,13 @@
 #include "mnblas.h"
 #include "complexe.h"
+#include "omp.h"
 
 void mnblas_saxpy(const int N, const float alpha, const float *X, const int incX, float *Y, const int incY)
 {
   register unsigned int i = 0 ;
   register unsigned int j = 0 ;
-  
+
+  #pragma parallel omp for private (i) reduction (+:dot)  
   for (; ((i < N) && (j < N)) ; i += incX)
     {
     Y[i] = alpha * X[i] + Y[i];

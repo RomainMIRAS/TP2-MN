@@ -1,6 +1,7 @@
 #include "mnblas.h"
 #include <stdio.h>
 #include "complexe.h"
+#include <omp.h>
 
 void mncblas_sgemv(const MNCBLAS_LAYOUT layout,
                    const MNCBLAS_TRANSPOSE TransA, const int M, const int N,
@@ -11,14 +12,15 @@ void mncblas_sgemv(const MNCBLAS_LAYOUT layout,
 
     // Y := alpha*A*x + beta*y
 
-    int i, j;
-    float d;
+    int i;
 
-    #pragma omp parallel for private(d, i, j)
+
+    #pragma omp parallel for private(i)
     // alpha * A * x
     for (i = 0; i < M; i++)
     {
-        d = 0.0;
+        float d = 0.0;
+        int j = 0;
         for (j = 0; j < N; j++){
             d += A[j+i*N] * X[j] * alpha;
         }

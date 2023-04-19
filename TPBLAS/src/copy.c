@@ -1,15 +1,17 @@
 #include "mnblas.h"
 #include "complexe.h"
+#include "omp.h"
+#include <stdio.h>
 
 void mncblas_scopy(const int N, const float *X, const int incX, 
                  float *Y, const int incY)
 {
-  register unsigned int i = 0 ;
-  register unsigned int j = 0 ;
-  
-  for (; ((i < N) && (j < N)) ; i += incX, j += incY)
+  register unsigned int i; 
+  #pragma omp parallel for
+  for (i = 0;i < N; i ++)
     {
-      Y [j] = X [i] ;
+      Y [i] = X [i] ;
+      printf("Indice %d\n",i);
     }
 
   return ;
