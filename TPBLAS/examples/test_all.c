@@ -592,7 +592,7 @@ int main(int argc, char **argv)
                 mncblas_sgemv(MNCblasRowMajor,MNCblasNoTrans,VECSIZE,VECSIZE,2,mat4, 1, vec9, 1,5,vec10,0); 
     TOP_MICRO(end);
 
-    calcul_flop_micro("sgemv micro", NB_FOIS*(3*(VECSIZE^2) + 2*VECSIZE), tdiff_micro(&start, &end));
+    calcul_flop_micro("sgemv micro", NB_FOIS*(3*(VECSIZE*VECSIZE) + 2*VECSIZE), tdiff_micro(&start, &end));
 
 
     // printf("==========================================================\n");
